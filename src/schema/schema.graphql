@@ -2,6 +2,8 @@ type Query {
     seasonList : [Season!]!
     racesByYear(year:String!): [Race!]
     raceSelect(year:String!,round:Int):Race
+    historyDrivers (pageElements : Int , page : Int) : [Driver!]!
+    driversYear(year:String!) : [Driver!]!
 }
 
 type Mutation {
@@ -40,3 +42,13 @@ type Location {
     country : String!
 }
 
+type Driver {
+    id : String!
+    url :  String!
+    name : String!
+    dateOfBirth : String!
+    nationality : String!
+    code: String
+    permanentNumber : String
+    urlMobile : String!
+}
