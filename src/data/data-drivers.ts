@@ -1,5 +1,5 @@
 import { F1 } from './data-source';
-import { checkYear } from '../lib/utils';
+import { checkYear  , roudCheck } from '../lib/utils';
 
 export class DriversData extends F1 {
     constructor(){
@@ -27,6 +27,27 @@ export class DriversData extends F1 {
         year = checkYear(year);
         return await this.get( String(year).concat('/drivers.json') ,{
             cacheOptions : { ttl : 60 }
+        })
+    }
+
+    async getDriversByYearAndRond(year : string , round:number){
+        year = checkYear(year);
+        round  = roudCheck(round)
+        return await this.get( String(year).concat(`/${round}`).concat('/drivers.json') ,{
+            cacheOptions : { ttl : 60 }
+        })
+    }
+
+    async getDriver(id : string){
+        return await this.get(`drivers/${id}.json`,{
+            cacheOptions : { ttl : 60 }
+        })
+    }
+    
+    async getSeasonsPilotsRaking(year:string){
+        year = checkYear(year)
+        return await this.get(String(year).concat('/driverStandings.json'),{
+            cacheOptions : {ttl:60}
         })
     }
 

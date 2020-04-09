@@ -1,18 +1,34 @@
 type Query {
+    
+    "Lista de las temporadas de 1950 a 2020 lo seleccionamos"
+    
     seasonList : [Season!]!
+    
+    """
+        Obtener la informacionb de las carrera selecionadas por año.
+        Tener en cuenta que solo existen de 1950 a 2020 
+    """
     racesByYear(year:String!): [Race!]
     raceSelect(year:String!,round:Int):Race
     historyDrivers (pageElements : Int , page : Int) : [Driver!]!
     driversYear(year:String!) : [Driver!]!
+    driversYearAndRoud(year:String! , round : Int!) : [Driver!]!
+    driverSelect(id:String!):Driver
+    "Clasificacion finales de los pilotos de temporada"
+    seasonPilotsRanking(year:String!) : [DriverStanding!]!
+
 }
 
 type Mutation {
     add(value: String!): [String]
 }
-
+"Informnacion de sesion"
 type Season {
+    "año de la temperada "
     year : String!
+    "Información de wikipedia"
     url : String!
+    "Información de wikipedia adaptada para móviles"
     urlMobile : String!
 }
 
@@ -51,4 +67,21 @@ type Driver {
     code: String
     permanentNumber : String
     urlMobile : String!
+}
+
+type DriverStanding {
+    position  : String!
+    positionText : String!
+    points : String!
+    wins : String!
+    driver:Driver!
+    constructors : [Constructor!]!
+}
+
+type Constructor {
+    id : String!
+    url : String!
+    urlMobile : String!
+    name : String!
+    nationality : String!
 }
