@@ -1,5 +1,5 @@
 import { F1 } from './data-source';
-import { checkYear  , roudCheck } from '../lib/utils';
+import { checkYear  , roudCheck, paginationOptions } from '../lib/utils';
 
 export class DriversData extends F1 {
     constructor(){
@@ -14,11 +14,8 @@ export class DriversData extends F1 {
             })    
         }
 
-        const offset = ( page -1 ) * pageElements;        
-        const limit = pageElements;
-        const filter = `limit${ limit}&offset=${offset}`;
 
-        return await this.get(`drivers.json?${filter}`,{
+        return await this.get(`drivers.json?${paginationOptions(pageElements,page)}`,{
             cacheOptions : { ttl : 60 }
         })
     }
