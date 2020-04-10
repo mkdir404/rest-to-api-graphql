@@ -36,7 +36,9 @@ async function init() {
     }));
 
     const PORT = process.env.PORT || 5000;
-
+    app.use('/',expressPlayGround({
+        endpoint : './graphql'
+    }))
     const httpServer = createServer(app);
 
     httpServer.listen({ port: PORT }, (): void => console.log(`http://localhost:${PORT}/graphql`));
